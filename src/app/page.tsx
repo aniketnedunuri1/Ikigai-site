@@ -6,9 +6,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between m-2 bg-transparent sm:grid grid-cols-3">
       <div className="flex flex-col justify-center p-8 gap-12 h-full bg-[url('/inverted-background.png')] bg-cover bg-center">
-        <div
-          className={`${newsreaderNormal.className} text-white text-[36px] max-w-md`}
-        >
+        <div className={`${newsreaderNormal.className} text-white text-[36px] max-w-md`}>
           club & company merch from the{" "}
           <span className={newsreaderItalic.className}>same</span> suppliers as
         </div>
