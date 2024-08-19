@@ -11,8 +11,14 @@ export default function Home() {
           <span className={newsreaderItalic.className}>same</span> suppliers as
         </div>
 
-            <Image src={"/logos.png"} alt={"AF"} width={300} height={100} />
-
+        <Image 
+          src="/logos.png" 
+          alt="AF" 
+          width={300} 
+          height={100} 
+          className="select-none"
+          draggable="false"
+        />
         <div className="flex flex-row gap-3 items-center">
           <Button className="max-w-xl">Get Started</Button>
           <div className={`${newsreaderNormal.className} text-white text-lg`}>
