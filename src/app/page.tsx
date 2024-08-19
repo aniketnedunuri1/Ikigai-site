@@ -16,7 +16,7 @@ export default function Home() {
             <Image src={"/logos.png"} alt={"AF"} width={300} height={100} />
 
         <div className="flex flex-row gap-3 items-center">
-          <Button className="max-w-32">Get Started</Button>
+          <Button className="max-w-xl">Get Started</Button>
           <div className={`${newsreaderNormal.className} text-white text-lg`}>
             starting at{" "}
             <span className={newsreaderItalic.className}>$20/piece</span>
