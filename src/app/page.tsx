@@ -1,13 +1,12 @@
 import { Button } from "../components/ui/button";
 import { newsreaderItalic, newsreaderNormal } from "../lib/fonts";
 import Image from "next/image";
-import { BlogPosts } from "./components/posts";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-between m-2 bg-transparent sm:grid grid-cols-3">
-
-      <div className="flex flex-col justify-center p-8 gap-12 h-dvh w-full bg-cover bg-center bg-[url('/inverted-background.png')]">
+      <div className="flex flex-col justify-center gap-12 h-dvh w-full bg-cover bg-center bg-[url('/inverted-background.png')] p-4 sm:p-8">
+      
         {/* Hero Pill, Text, and Images */}
         <div>
           <div className="flex flex-row items-center gap-3 outline outline-[0.5px] outline-white p-1 px-3 rounded-full w-[240px] bg-white/5">
@@ -61,7 +60,6 @@ export default function Home() {
                 </clipPath>
               </defs>
             </svg>
-
             <div className="text-sm">closes in 3 weeks</div>
           </div>
           <ul className="space-y-2">

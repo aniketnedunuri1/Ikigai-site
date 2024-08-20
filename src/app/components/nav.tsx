@@ -17,7 +17,7 @@ export function Navbar() {
   return (
     <div className="lg:sticky">
       <nav
-        className="flex flex-row items-start justify-between absolute top-0 left-0 w-full p-8"
+        className="sm: flex flex-row items-start justify-between absolute top-0 left-0 w-full p-8"
         id="nav"
       >
         {/* Logo */}
@@ -33,7 +33,7 @@ export function Navbar() {
         </Link>
 
         {/* Navigation Items */}
-        <div className="flex flex-row text-white font-thin">
+        <div className="flex flex-col items-end text-sm sm:flex-row text-white font-thin text-md">
           {Object.entries(navItems).map(([path, { name }]) => {
             return (
               <Link
