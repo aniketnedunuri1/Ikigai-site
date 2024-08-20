@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <main className="bg-white">
-        <body className="overflow-hidden">
+        <body className="sm:overflow-hidden">
           <Navbar></Navbar>
           {children}
           </body>
