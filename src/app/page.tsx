@@ -1,6 +1,7 @@
 import { Button } from "../components/ui/button";
 import { newsreaderItalic, newsreaderNormal } from "../lib/fonts";
 import Image from "next/image";
+import  RequestOrder  from "./components/request-order"
 
 export default function Home() {
   return (
@@ -23,7 +24,7 @@ export default function Home() {
             as
           </div>
           <Image
-            src="/logos.png"
+            src="/logos_new.png"
             alt="AF"
             width={300}
             height={100}
@@ -34,7 +35,8 @@ export default function Home() {
 
 
         <div className="flex flex-row gap-3 items-center">
-          <Button className="max-w-xl">request order</Button>
+          {/* <Button className="max-w-xl">request order</Button> */}
+          <RequestOrder />
         </div>
 
         {/* Lower bullets */}

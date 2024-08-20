@@ -8,7 +8,7 @@ const navItems = {
   '/blog': {
     name: 'BLOG',
   },
-  'https://vercel.com/templates/next.js/portfolio-starter-kit': {
+  'https://calendly.com/aniketnedunuri/30min': {
     name: 'CONTACT',
   },
 }
