@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
+import Footer from "./components/footer";
+import { Navbar } from "./components/nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-white overflow-hidden" >{children}</body>
-      <Analytics mode={'production'} />;
+      <main className="bg-white">
+        <body className="overflow-hidden">
+          <Navbar></Navbar>
+          {children}
+          </body>
+      </main>
+      <Analytics/>
+      {/* <Footer></Footer> */}
     </html>
   );
 }
