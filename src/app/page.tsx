@@ -5,9 +5,9 @@ import { BlogPosts } from "./components/posts";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col sm:grid sm:grid-cols-3 items-center justify-between m-2 bg-transparent">
-      <div className="flex flex-col justify-center p-8 gap-12 h-full w-full sm:w-auto bg-[url('/inverted-background.png')] bg-cover bg-center sm:col-span-1">
-        
+    <div className="flex min-h-screen flex-col items-center justify-between m-2 bg-transparent sm:grid grid-cols-3">
+
+      <div className="flex flex-col justify-center p-8 gap-12 h-dvh w-full bg-cover bg-center bg-[url('/inverted-background.png')]">
         {/* Hero Pill, Text, and Images */}
         <div>
           <div className="flex flex-row items-center gap-3 outline outline-[0.5px] outline-white p-1 px-3 rounded-full w-[240px] bg-white/5">
@@ -82,6 +82,6 @@ export default function Home() {
         </div>
       </div>
       <div className="hidden sm:block sm:col-span-2 bg-black h-full bg-[url('/background.png')] bg-cover bg-center"></div>
-    </main>
+    </div>
   );
 }
