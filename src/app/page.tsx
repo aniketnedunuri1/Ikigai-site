@@ -38,7 +38,7 @@ export default function Home() {
         </div>
 
         {/* Lower bullets */}
-        <div className="text-white absolute bottom-0 left-0 p-8">
+        <div className="text-white sm:absolute bottom-0 left-0 sm:p-8">
           <div className="flex items-center gap-2 mb-4">
             <svg
               width="15"
