@@ -2,9 +2,9 @@ import Link from 'next/link'
 import { newsreaderNormal } from '../../lib/fonts'
 
 const navItems = {
-  '/about': {
-    name: 'ABOUT',
-  },
+  // '/about': {
+  //   name: 'ABOUT',
+  // },
   '/blog': {
     name: 'BLOG',
   },

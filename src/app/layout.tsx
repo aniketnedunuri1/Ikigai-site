@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import Footer from "./components/footer";
 import { Navbar } from "./components/nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Ivy & Co",
-  description: "College merch done right",
+  title: "Couture",
+  description: "Company & Club Merch Done Right",
 };
 
 export default function RootLayout({
@@ -24,7 +23,6 @@ export default function RootLayout({
           {children}
           </body>
       <Analytics/>
-      {/* <Footer></Footer> */}
     </html>
   );
 }
