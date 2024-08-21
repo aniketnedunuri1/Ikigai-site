@@ -12,7 +12,7 @@ const FormSchema = z.object({
 
 type FormData = z.infer<typeof FormSchema>;
 
-export async function SubmitForm(data: FormData) {
+export async function submitForm(data: FormData) {
   const parsedData = FormSchema.safeParse(data);
 
   if (!parsedData.success) {
