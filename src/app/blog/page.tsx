@@ -1,15 +1,12 @@
 import { BlogPosts } from "../components/posts"
 
-export const metadata = {
-  title: 'Blog',
-  description: 'Read my blog.',
-}
-
 export default function Page() {
   return (
-    <section>
-      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">My Blog</h1>
+    <section className="flex justify-center">
+      <div className="mt-8">
+      <h1 className="text-2xl mb-8 tracking-tighter font-medium">Our Posts</h1>
       <BlogPosts />
+      </div>
     </section>
   )
 }

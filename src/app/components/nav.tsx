@@ -16,10 +16,7 @@ const navItems = {
 export function Navbar() {
   return (
     <div className="lg:sticky">
-      <nav
-        className="sm: flex flex-row items-start justify-between absolute top-0 left-0 w-full p-8"
-        id="nav"
-      >
+      <nav className="flex flex-row items-start justify-between absolute top-0 left-0 w-full p-8" id="nav" >
         {/* Logo */}
         <Link href="/">
           <div className="flex flex-col cursor-pointer">
@@ -33,7 +30,7 @@ export function Navbar() {
         </Link>
 
         {/* Navigation Items */}
-        <div className="flex flex-col items-end text-sm sm:flex-row text-white font-thin text-md">
+        <div className="flex flex-col items-end text-sm sm:flex-row font-thin text-md text-white	mix-blend-difference">
           {Object.entries(navItems).map(([path, { name }]) => {
             return (
               <Link

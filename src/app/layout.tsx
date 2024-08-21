@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "./components/nav";
+import { HeroTile } from "./components/hero";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body className="sm:overflow-hidden bg-white">
-          <Navbar></Navbar>
-          {children}
-          </body>
-      <Analytics/>
+      <body className="bg-white">
+        <Navbar></Navbar>
+        <div>{children}</div>
+      </body>
+      <Analytics />
     </html>
   );
 }

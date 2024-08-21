@@ -59,7 +59,7 @@ export default function Blog({ params }) {
   }
 
   return (
-    <section>
+    <section className='flex justify-center bg-white p-20'>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -82,6 +82,7 @@ export default function Blog({ params }) {
           }),
         }}
       />
+      <div>
       <h1 className="title font-semibold text-2xl tracking-tighter">
         {post.metadata.title}
       </h1>
@@ -93,6 +94,8 @@ export default function Blog({ params }) {
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
+      </div>
+
     </section>
   )
 }
