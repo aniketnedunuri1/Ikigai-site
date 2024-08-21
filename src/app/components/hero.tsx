@@ -6,7 +6,7 @@ import { RequestOrder } from "./request-order";
 
 export function HeroTile() {
     return(
-      <div className="flex flex-col justify-center gap-12 h-dvh w-full p-4 sm:p-8 sm:overflow-hidden">
+      <div className="flex flex-col justify-center gap-12 h-dvh w-full p-4 sm:p-8">
         <Hero></Hero>
         <InformationFooter></InformationFooter>
       </div>
@@ -28,7 +28,7 @@ export function HeroTile() {
   
           {/* Hero Text */}
           <div
-            className={`${newsreaderNormal.className} text-white text-[36px] max-w-md my-6`}
+            className={`${newsreaderNormal.className} text-white text-3xl sm:text-[36px] max-w-md my-6`}
           >
             club & company merch from the{" "}
             <span className={newsreaderItalic.className}>same</span> suppliers as
