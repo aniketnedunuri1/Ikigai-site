@@ -8,10 +8,17 @@ type Metadata = {
   image?: string
 }
 
-function parseFrontmatter(fileContent: string) {
+function parseFrontmatter(fileContent: string, filePath?: string) {
   let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
   let match = frontmatterRegex.exec(fileContent)
-  let frontMatterBlock = match![1]
+  
+  if (!match) {
+    console.error(`Error: No frontmatter found in file ${filePath || 'unknown file'}`)
+    console.error('File content:', fileContent)
+    throw new Error(`Frontmatter parsing failed for file: ${filePath || 'unknown file'}`)
+  }
+
+  let frontMatterBlock = match[1]
   let content = fileContent.replace(frontmatterRegex, '').trim()
   let frontMatterLines = frontMatterBlock.trim().split('\n')
   let metadata: Partial<Metadata> = {}
@@ -19,20 +26,21 @@ function parseFrontmatter(fileContent: string) {
   frontMatterLines.forEach((line) => {
     let [key, ...valueArr] = line.split(': ')
     let value = valueArr.join(': ').trim()
-    value = value.replace(/^['"](.*)['"]$/, '$1') // Remove quotes
+    value = value.replace(/^['"](.*)['"]$/, '$1')
     metadata[key.trim() as keyof Metadata] = value
   })
 
   return { metadata: metadata as Metadata, content }
 }
 
+
 function getMDXFiles(dir) {
   return fs.readdirSync(dir).filter((file) => path.extname(file) === '.mdx')
 }
 
-function readMDXFile(filePath) {
+function readMDXFile(filePath: string) {
   let rawContent = fs.readFileSync(filePath, 'utf-8')
-  return parseFrontmatter(rawContent)
+  return parseFrontmatter(rawContent, filePath)
 }
 
 function getMDXData(dir) {
@@ -88,3 +96,4 @@ export function formatDate(date: string, includeRelative = false) {
 
   return `${fullDate} (${formattedDate})`
 }
+
