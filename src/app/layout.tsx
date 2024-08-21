@@ -19,12 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <main className="bg-white">
-        <body className="sm:overflow-hidden">
+        <body className="sm:overflow-hidden bg-white">
           <Navbar></Navbar>
           {children}
           </body>
-      </main>
       <Analytics/>
       {/* <Footer></Footer> */}
     </html>

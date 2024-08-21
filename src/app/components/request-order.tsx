@@ -1,13 +1,74 @@
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../../components/ui/dialog";
-import { Button } from "../../components/ui/button";
-import { Label } from "../../components/ui/label";
-import { Input } from "../../components/ui/input";
-import { Textarea } from "../../components/ui/textarea";
-import {ThemeProvider} from "../components/theme-provider"
+"use client"
 
-import React from "react";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
-export default function RequestOrder() {
+import { Button } from "@/components/ui/button"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/dialog"
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { ThemeProvider } from "./theme-provider"
+import { SubmitForm } from "../../lib/actions"
+
+const formSchema = z.object({
+    name: z.string().min(1, {
+        message: "Name is required.",
+    }),
+    email: z.string().email({
+        message: "Invalid email address.",
+    }),
+    phone: z.string().optional(),
+    selectedTypes: z.array(z.string()).min(1, {
+        message: "At least one clothing type must be selected.",
+    }),
+    details: z.string().optional(),
+})
+
+export function RequestOrder() {
+    // 1. Define your form.
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            email: "",
+            phone: "",
+            selectedTypes: [],
+            details: "",
+        },
+    })
+
+    // 2. Define a submit handler.
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log(values)
+        await SubmitForm(values)
+    }
+
+    const handleTypeToggle = (type: string) => {
+        const { selectedTypes } = form.getValues();
+        if (selectedTypes.includes(type)) {
+            form.setValue("selectedTypes", selectedTypes.filter((t) => t !== type));
+        } else {
+            form.setValue("selectedTypes", [...selectedTypes, type]);
+        }
+    }
+
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -22,68 +83,109 @@ export default function RequestOrder() {
                 >
                     <DialogHeader>
                         <DialogTitle className="text-2xl">
-                            What are you interested in?
+                            What are you looking to buy?
                         </DialogTitle>
                         <DialogDescription className="text-xsm">
-                            *orders of 10+ pieces get custom merch design*
+                            orders of 10+ pieces get custom merch design
                         </DialogDescription>
                     </DialogHeader>
-                    <div className="grid gap-4 py-4">
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="name" className="text-right">
-                                Name
-                            </Label>
-                            <Input
-                                id="name"
-                                defaultValue="Jane Doe"
-                                className="col-span-3"
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Name</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Jane Doe" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
                             />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="username" className="text-right">
-                                Username
-                            </Label>
-                            <Input
-                                type="email"
-                                id="email"
-                                placeholder="Email"
-                                className="col-span-3"
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="jane@example.com" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
                             />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="phone" className="text-right">
-                                Phone
-                            </Label>
-                            <Input
-                                type="phone"
-                                id="phone"
-                                placeholder="Phone"
-                                className="col-span-3"
+                            <FormField
+                                control={form.control}
+                                name="phone"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Phone</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="123-456-7890" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
                             />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="phone" className="text-right">
-                                Details
-                            </Label>
-                            <Textarea
-                                placeholder="Enter details about clothes here (type of clothing, quantity, etc)."
-                                className="col-span-3"
+                            <FormField
+                                control={form.control}
+                                name="selectedTypes"
+                                render={() => (
+                                    <FormItem>
+                                        <FormLabel>Clothing</FormLabel>
+                                        <FormControl>
+                                            <div className="flex space-x-2">
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    onClick={() => handleTypeToggle("hoodies")}
+                                                    className={form.getValues().selectedTypes.includes('hoodies') ? 'bg-black text-white' : 'bg-gray-200'}
+                                                >
+                                                    Hoodies
+                                                </Button>
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    onClick={() => handleTypeToggle("crewneck")}
+                                                    className={form.getValues().selectedTypes.includes('crewneck') ? 'bg-black text-white' : 'bg-gray-200'}
+                                                >
+                                                    Crewneck
+                                                </Button>
+                                                <Button
+                                                    type="button"
+                                                    variant="outline"
+                                                    onClick={() => handleTypeToggle("tshirts")}
+                                                    className={form.getValues().selectedTypes.includes('tshirts') ? 'bg-black text-white' : 'bg-gray-200'}
+                                                >
+                                                    Tshirts
+                                                </Button>
+                                            </div>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
                             />
-                        </div>
-                    </div>
-                    <div className="text-center mt-2">
-                        <Button variant="outline" type="submit">Save changes</Button>
-                    </div>
-                    <div className="text-center mt-2">
-                        <span> or </span>
-                    </div>
-                    <div className="text-center mt-2">
-                        <a href="https://calendly.com/aniketnedunuri/30min" target="_blank" rel="noopener noreferrer">
-                            <Button variant="outline">Book a call</Button>
-                        </a>
-                    </div>
+                            <FormField
+                                control={form.control}
+                                name="details"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Details</FormLabel>
+                                        <FormControl>
+                                            <Textarea placeholder="Enter details about clothes here (type of clothing, quantity, etc)." {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type="submit" className="bg-black text-white">Submit</Button>
+                        </form>
+                    </Form>
                 </ThemeProvider>
             </DialogContent>
         </Dialog>
-    );
+    )
 }

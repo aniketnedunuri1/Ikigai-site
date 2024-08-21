@@ -1,7 +1,7 @@
 import { Button } from "../components/ui/button";
 import { newsreaderItalic, newsreaderNormal } from "../lib/fonts";
 import Image from "next/image";
-import  RequestOrder  from "./components/request-order"
+import { RequestOrder } from "./components/request-order";
 
 export default function Home() {
   return (
@@ -26,7 +26,7 @@ export default function Home() {
           <Image
             src="/logos_new.png"
             alt="AF"
-            width={300}
+            width={250}
             height={100}
             className="select-none"
             draggable="false"
