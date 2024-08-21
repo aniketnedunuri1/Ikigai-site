@@ -66,7 +66,38 @@
   body {
     @apply bg-background text-foreground;
   }
-  h2 {
-    @apply text-xl font-bold mb-4 mt-4 text-primary;
-  }
+  
+
+ p {
+  @apply my-4 text-neutral-800 dark:text-neutral-200;
+}
+
+ h1 {
+  @apply text-4xl font-medium tracking-tight mt-6 mb-2;
+}
+
+ h2 {
+  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+}
+
+ h3 {
+  @apply text-xl font-medium tracking-tight mt-6 mb-2;
+}
+
+h4 {
+  @apply text-lg font-medium tracking-tight mt-6 mb-2;
+}
+
+strong {
+  @apply font-medium;
+}
+
+ ul {
+  @apply list-disc pl-6;
+}
+
+ol {
+  @apply list-decimal pl-6;
+}
+
 }
