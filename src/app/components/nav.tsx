@@ -16,7 +16,7 @@ const navItems = {
 export function Navbar() {
   return (
     <div className="lg:sticky">
-      <nav className="flex flex-row items-start justify-between absolute top-0 left-0 w-full p-8" id="nav" >
+      <nav className="flex flex-row items-start justify-between absolute top-0 left-0 w-full p-8 z-20" id="nav" >
         {/* Logo */}
         <Link href="/">
           <div className="flex flex-col cursor-pointer">

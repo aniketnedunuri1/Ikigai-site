@@ -19,7 +19,7 @@ export function HeroTile() {
         {/* Hero Pill, Text, and Images */}
   
         <div>
-          <div className="flex flex-row items-center gap-3 outline outline-[0.5px] outline-white p-1 px-3 rounded-full w-[240px] bg-white/5">
+          <div className="flex flex-row items-center gap-3 outline outline-[0.5px] outline-white p-1 px-3 rounded-full w-[240px] bg-white/5 mt-48 sm:mt-0">
             <div className="w-2 h-2 bg-white rounded-full"></div>
             <div className="text-white text-sm font-thin whitespace-normal break-words">
               on demand ordering available

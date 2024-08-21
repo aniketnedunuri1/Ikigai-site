@@ -59,7 +59,7 @@ export default function Blog({ params }) {
   }
 
   return (
-    <section className='flex justify-center bg-white p-20'>
+    <section className='flex justify-center bg-white'>
       <script
         type="application/ld+json"
         suppressHydrationWarning
