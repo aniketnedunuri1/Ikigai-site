@@ -40,6 +40,8 @@ const formSchema = z.object({
     message: "At least one clothing type must be selected.",
   }),
   details: z.string().optional(),
+
+  logo: z.instanceof(File).optional(),
 });
 
 export function RequestOrder() {
@@ -53,6 +55,7 @@ export function RequestOrder() {
       phone: "",
       selectedTypes: [],
       details: "",
+      logo: undefined,
     },
   });
 
@@ -73,6 +76,15 @@ export function RequestOrder() {
     } else {
       form.setValue("selectedTypes", [...selectedTypes, type]);
     }
+  };
+  
+  const handleLogoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      form.setValue("logo", event.target.files[0]);
+    } else {
+      form.setValue("logo", undefined);
+    }
+
   };
 
   return (
@@ -206,6 +218,33 @@ export function RequestOrder() {
                         placeholder="Enter details about clothes here (type of clothing, quantity, etc)."
                         {...field}
                       />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="logo"
+                render={() => (
+                  <FormItem>
+                    <FormLabel>Logo</FormLabel>
+                    <FormControl>
+                      <label className="block w-full relative h-10">
+                        <input
+                          type="file"
+                          accept=".jpg, .jpeg, .png, .gif"
+                          onChange={handleLogoChange}
+                          className="absolute opacity-0 z-0 w-full h-full cursor-pointer"
+                        />
+                        <Button type="button" variant="default" className="w-full h-full bg-gray-500">
+                          {form.getValues().logo ? (
+                            <span>File Selected: {form.getValues().logo?.name}</span>
+                          ) : (
+                            <span>Choose File</span>
+                          )}
+                        </Button>
+                      </label>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
