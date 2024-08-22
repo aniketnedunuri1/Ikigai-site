@@ -177,6 +177,18 @@ export function RequestOrder() {
                         >
                           Tshirts
                         </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => handleTypeToggle("sweatpants")}
+                          className={
+                            form.getValues().selectedTypes.includes("sweatpants")
+                              ? "bg-black text-white"
+                              : "bg-gray-200"
+                          }
+                        >
+                          Sweatpants
+                        </Button>
                       </div>
                     </FormControl>
                     <FormMessage />

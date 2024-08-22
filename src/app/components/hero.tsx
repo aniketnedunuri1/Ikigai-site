@@ -38,7 +38,7 @@ export function HeroTile() {
             alt="AF"
             width={250}
             height={100}
-            className="select-none"
+            className="select-none mobile-image"
             draggable="false"
           />
         </div>
