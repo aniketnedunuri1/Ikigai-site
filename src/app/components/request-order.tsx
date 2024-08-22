@@ -80,7 +80,7 @@ export function RequestOrder() {
       <DialogTrigger asChild>
         <Button variant="default">Request Order</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] max-h-[80vh] overflow-y-auto">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -88,12 +88,9 @@ export function RequestOrder() {
           disableTransitionOnChange
         >
           <DialogHeader>
-            <DialogTitle className="text-2xl">
-              What are you looking to buy?
+            <DialogTitle className="text-xl">
+              Request Order?
             </DialogTitle>
-            <DialogDescription className="text-xsm">
-              orders of 10+ pieces get custom merch design
-            </DialogDescription>
           </DialogHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
