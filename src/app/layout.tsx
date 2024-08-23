@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "./components/nav";
 import { HeroTile } from "./components/hero";
+import { Toaster } from "../components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
         <div>{children}</div>
       </body>
       <Analytics />
+      <Toaster/>
     </html>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -14,6 +15,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import {
   Form,
   FormControl,
   FormDescription,
@@ -27,6 +38,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { ThemeProvider } from "./theme-provider";
 import { submitForm } from "../../lib/actions";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { useMediaQuery } from "../../lib/use-media-query";
+import { toast } from "../../components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -43,7 +57,9 @@ const formSchema = z.object({
 });
 
 export function RequestOrder() {
+  const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,9 +74,25 @@ export function RequestOrder() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
-    console.log(values);
-    await submitForm(values);
-    setLoading(false);
+    try {
+      console.log(values);
+      await submitForm(values);
+      toast({
+        title: "Order Requested Successfully",
+        description: "We've received your order request and will process it shortly.",
+      });
+      setOpen(false);
+      form.reset();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem submitting your order. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   }
 
   const handleTypeToggle = (type: string) => {
@@ -74,158 +106,145 @@ export function RequestOrder() {
       form.setValue("selectedTypes", [...selectedTypes, type]);
     }
   };
-  
+
+  const FormContent = ({ className }: React.ComponentProps<"div">) => (
+    <div className={cn("space-y-8", className)}>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Jane Doe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="jane@example.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone</FormLabel>
+                <FormControl>
+                  <Input placeholder="123-456-7890" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex flex-wrap">
+            <FormField
+              control={form.control}
+              name="selectedTypes"
+              render={() => (
+                <FormItem>
+                  <FormLabel>Clothing</FormLabel>
+                  <FormControl>
+                    <div className="flex space-x-2">
+                      {["hoodies", "crewneck", "tshirts", "sweatpants"].map((type) => (
+                        <Button
+                          key={type}
+                          type="button"
+                          variant="outline"
+                          onClick={() => handleTypeToggle(type)}
+                          className={
+                            form.getValues().selectedTypes.includes(type)
+                              ? "bg-black text-white"
+                              : "bg-gray-200"
+                          }
+                        >
+                          {type.charAt(0).toUpperCase() + type.slice(1)}
+                        </Button>
+                      ))}
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name="details"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Details</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Enter details about clothes here (type of clothing, quantity, etc)."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {loading ? (
+            <Button disabled>
+              <ReloadIcon className="mr-2 h-4 w-4 animate-spin outline outline-1 outline-black" />
+              Please wait
+            </Button>
+          ) : (
+            <Button type="submit" className="bg-black text-white">
+              Submit
+            </Button>
+          )}
+        </form>
+      </Form>
+    </div>
+  );
+
+  if (isDesktop) {
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="default">Request Order</Button>
+        </DialogTrigger>
+        <DialogContent className="">
+          <DialogHeader>
+            <DialogTitle>Request Order</DialogTitle>
+            <DialogDescription>
+              Fill out the form to request an order. Click submit when you're done.
+            </DialogDescription>
+          </DialogHeader>
+          <FormContent />
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <Drawer open={open} onOpenChange={setOpen}> 
+      <DrawerTrigger asChild>
         <Button variant="default">Request Order</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] max-h-[80vh] overflow-y-auto">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <DialogHeader>
-            <DialogTitle className="text-xl">
-              Request Order?
-            </DialogTitle>
-          </DialogHeader>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Jane Doe" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input placeholder="jane@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Phone</FormLabel>
-                    <FormControl>
-                      <Input placeholder="123-456-7890" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="selectedTypes"
-                render={() => (
-                  <FormItem>
-                    <FormLabel>Clothing</FormLabel>
-                    <FormControl>
-                      <div className="flex space-x-2">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => handleTypeToggle("hoodies")}
-                          className={
-                            form.getValues().selectedTypes.includes("hoodies")
-                              ? "bg-black text-white"
-                              : "bg-gray-200"
-                          }
-                        >
-                          Hoodies
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => handleTypeToggle("crewneck")}
-                          className={
-                            form.getValues().selectedTypes.includes("crewneck")
-                              ? "bg-black text-white"
-                              : "bg-gray-200"
-                          }
-                        >
-                          Crewneck
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => handleTypeToggle("tshirts")}
-                          className={
-                            form.getValues().selectedTypes.includes("tshirts")
-                              ? "bg-black text-white"
-                              : "bg-gray-200"
-                          }
-                        >
-                          Tshirts
-                        </Button>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => handleTypeToggle("sweatpants")}
-                          className={
-                            form.getValues().selectedTypes.includes("sweatpants")
-                              ? "bg-black text-white"
-                              : "bg-gray-200"
-                          }
-                        >
-                          Sweatpants
-                        </Button>
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="details"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Details</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Enter details about clothes here (type of clothing, quantity, etc)."
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {loading ? (
-                <Button disabled>
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                  Please wait
-                </Button>
-              ) : (
-                <Button type="submit" className="bg-black text-white">
-                  Submit
-                </Button>
-              )}
-            </form>
-          </Form>
-        </ThemeProvider>
-      </DialogContent>
-    </Dialog>
+      </DrawerTrigger>
+      <DrawerContent className="overflow-y-auto focus:outline-none">
+        <DrawerHeader className="text-left">
+          <DrawerTitle>Request Order</DrawerTitle>
+          <DrawerDescription>
+            Fill out the form to request an order. Click submit when you're done.
+          </DrawerDescription>
+        </DrawerHeader>
+        <FormContent className="px-4" />
+      </DrawerContent>
+    </Drawer>
   );
 }

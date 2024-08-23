@@ -18,6 +18,13 @@ const config = {
       },
     },
     extend: {
+      utilities: {
+        '.drawer-height-fix': {
+          '&[vaul-drawer][vaul-drawer-direction="bottom"]::after': {
+            height: '100vh !important',
+          },
+        },
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
