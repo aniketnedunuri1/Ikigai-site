@@ -39,9 +39,7 @@ const formSchema = z.object({
   selectedTypes: z.array(z.string()).min(1, {
     message: "At least one clothing type must be selected.",
   }),
-  details: z.string().optional(),
-
-  logo: z.instanceof(File).optional(),
+  details: z.string().optional()
 });
 
 export function RequestOrder() {
@@ -78,14 +76,6 @@ export function RequestOrder() {
     }
   };
   
-  const handleLogoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      form.setValue("logo", event.target.files[0]);
-    } else {
-      form.setValue("logo", undefined);
-    }
-
-  };
 
   return (
     <Dialog>
