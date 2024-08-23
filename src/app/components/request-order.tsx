@@ -53,7 +53,6 @@ export function RequestOrder() {
       phone: "",
       selectedTypes: [],
       details: "",
-      logo: undefined,
     },
   });
 
