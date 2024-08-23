@@ -223,33 +223,6 @@ export function RequestOrder() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="logo"
-                render={() => (
-                  <FormItem>
-                    <FormLabel>Logo</FormLabel>
-                    <FormControl>
-                      <label className="block w-full relative h-10">
-                        <input
-                          type="file"
-                          accept=".jpg, .jpeg, .png, .gif"
-                          onChange={handleLogoChange}
-                          className="absolute opacity-0 z-0 w-full h-full cursor-pointer"
-                        />
-                        <Button type="button" variant="default" className="w-full h-full bg-gray-500">
-                          {form.getValues().logo ? (
-                            <span>File Selected: {form.getValues().logo?.name}</span>
-                          ) : (
-                            <span>Choose File</span>
-                          )}
-                        </Button>
-                      </label>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               {loading ? (
                 <Button disabled>
                   <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
