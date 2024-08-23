@@ -39,7 +39,7 @@ const formSchema = z.object({
   selectedTypes: z.array(z.string()).min(1, {
     message: "At least one clothing type must be selected.",
   }),
-  details: z.string().optional(),
+  details: z.string().optional()
 });
 
 export function RequestOrder() {
@@ -53,6 +53,7 @@ export function RequestOrder() {
       phone: "",
       selectedTypes: [],
       details: "",
+      logo: undefined,
     },
   });
 
@@ -74,6 +75,7 @@ export function RequestOrder() {
       form.setValue("selectedTypes", [...selectedTypes, type]);
     }
   };
+  
 
   return (
     <Dialog>
@@ -176,6 +178,18 @@ export function RequestOrder() {
                           }
                         >
                           Tshirts
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          onClick={() => handleTypeToggle("sweatpants")}
+                          className={
+                            form.getValues().selectedTypes.includes("sweatpants")
+                              ? "bg-black text-white"
+                              : "bg-gray-200"
+                          }
+                        >
+                          Sweatpants
                         </Button>
                       </div>
                     </FormControl>

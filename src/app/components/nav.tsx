@@ -5,9 +5,9 @@ const navItems = {
   // '/about': {
   //   name: 'ABOUT',
   // },
-  '/blog': {
-    name: 'BLOG',
-  },
+  // '/blog': {
+  //   name: 'BLOG',
+  // },
   'https://calendly.com/aniketnedunuri/30min': {
     name: 'CONTACT',
   },

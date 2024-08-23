@@ -57,6 +57,17 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+  .mobile-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .mobile-image {
+      width: 50%;
+      height: auto;
+    }
+  }
 }
 
 @layer base {
