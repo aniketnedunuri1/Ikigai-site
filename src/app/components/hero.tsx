@@ -6,7 +6,7 @@ import { RequestOrder } from "./request-order";
 
 export function HeroTile() {
     return(
-      <div className="flex flex-col justify-center gap-12 h-dvh w-full p-4 sm:p-8">
+      <div className="flex flex-col justify-center gap-12 sm:h-dvh w-full p-4 sm:p-8">
         <Hero></Hero>
         <InformationFooter></InformationFooter>
       </div>

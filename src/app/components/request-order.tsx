@@ -35,7 +35,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ThemeProvider } from "./theme-provider";
 import { submitForm } from "../../lib/actions";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -59,7 +58,6 @@ const formSchema = z.object({
 export function RequestOrder() {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -211,14 +209,13 @@ export function RequestOrder() {
       </Form>
     </div>
   );
-
-  if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button variant="default">Request Order</Button>
         </DialogTrigger>
-        <DialogContent className="">
+        
+        <DialogContent className="flex flex-col overflow-auto">
           <DialogHeader>
             <DialogTitle>Request Order</DialogTitle>
             <DialogDescription>
@@ -229,22 +226,5 @@ export function RequestOrder() {
         </DialogContent>
       </Dialog>
     );
-  }
-
-  return (
-    <Drawer open={open} onOpenChange={setOpen}> 
-      <DrawerTrigger asChild>
-        <Button variant="default">Request Order</Button>
-      </DrawerTrigger>
-      <DrawerContent className="overflow-y-auto focus:outline-none">
-        <DrawerHeader className="text-left">
-          <DrawerTitle>Request Order</DrawerTitle>
-          <DrawerDescription>
-            Fill out the form to request an order. Click submit when you're done.
-          </DrawerDescription>
-        </DrawerHeader>
-        <FormContent className="px-4" />
-      </DrawerContent>
-    </Drawer>
-  );
+ 
 }
