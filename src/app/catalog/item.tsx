@@ -16,9 +16,11 @@ export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Im
 
   return (
     <Card className="w-96 mx-4 shadow-none border-none bg-transparent">
+        
       <CardHeader>
-        <CardTitle className="text-center text-xl font-normal">IKIGAI</CardTitle>
+      
         <CardTitle className="text-center text-xl font-normal">{title}</CardTitle>
+
       </CardHeader>
       <CardContent>
         <div

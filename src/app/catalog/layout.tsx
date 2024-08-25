@@ -7,6 +7,7 @@ export default function BlogLayout({
 }) {
   return (
     <div className="sm:grid sm:grid-cols-3">
+      
       {/* Strip of background */}
       <div className="h-48 bg-cover bg-center bg-[url('/inverted-background.png')] sm:hidden"></div>
       <div className="hidden sm:block sm:fixed sm:w-1/3 sm:bg-[url('/inverted-background.png')]">
