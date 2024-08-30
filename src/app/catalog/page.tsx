@@ -14,10 +14,14 @@ export default function Page() {
 
       {/* Items */}
       <div className="grid grid-cols-2 grid-x-2">
-        <Item src1="/catalog/hoodie_front.png" src2="/catalog/hoodie_back.png" title="HOODIE" />
-        <Item src1="/catalog/crew_front.png" src2="/catalog/crew_back.png" title="CREW"/>
-        <Item src1="/catalog/ikigai_pants_front.png" src2="/catalog/ikigai_pants_back.png" title="SWEATS"/>
-        <Item src1="/catalog/shirt_front.png" src2="/catalog/shirt_back.png" title="TEE"/>
+        <Item src1="/catalog/hoodie_front.png" src2="/catalog/hoodie_back.png" title="HOODIE" 
+        desc = "Heavyweight 100% Cotton Blend. Slightly oversized, baggier fit." />
+        <Item src1="/catalog/crew_front.png" src2="/catalog/crew_back.png" title="CREW"  
+        desc = "Heavyweight 100% Cotton Blend. Slightly oversized, baggier fit." />
+        <Item src1="/catalog/ikigai_pants_front.png" src2="/catalog/ikigai_pants_back.png" title="SWEATS"
+        desc = "Midweight French Terry Cotton Blend. Standard Fit."/>
+        <Item src1="/catalog/shirt_front.png" src2="/catalog/shirt_back.png" title="TEE" 
+        desc = "Heavyweight / Midweight 100% Cotton Blend. Regular & Oversized Fit available. "/>
       </div>
     </section>
   );

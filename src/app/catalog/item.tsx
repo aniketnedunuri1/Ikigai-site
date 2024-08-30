@@ -9,9 +9,10 @@ interface ItemProps {
   alt1?: string; // Alt text for the front image
   alt2?: string; // Alt text for the back image
   title: string; // Title text for the card
+  desc: string;
 }
 
-export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Image', title }: ItemProps) {
+export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Image', title, desc}: ItemProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -23,6 +24,7 @@ export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Im
 
       </CardHeader>
       <CardContent>
+        <span className="flex justify-center text-center italic">  {desc} </span>
         <div
           className="relative w-full h-96" 
           onMouseEnter={() => setIsHovered(true)}
