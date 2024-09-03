@@ -148,7 +148,7 @@ export function RequestOrder() {
               </FormItem>
             )}
           />
-          <div className="flex flex-wrap">
+          {/* <div className="flex flex-wrap">
             <FormField
               control={form.control}
               name="selectedTypes"
@@ -178,16 +178,16 @@ export function RequestOrder() {
                 </FormItem>
               )}
             />
-          </div>
+          </div> */}
           <FormField
             control={form.control}
             name="details"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Details</FormLabel>
+                <FormLabel>Additional Information</FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Enter details about clothes here (type of clothing, quantity, etc)."
+                    placeholder="Enter any inquiries/needs here"
                     {...field}
                   />
                 </FormControl>
@@ -212,12 +212,12 @@ export function RequestOrder() {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="default">Request Order</Button>
+          <Button variant="default">Request Order / Get in Touch</Button>
         </DialogTrigger>
         
         <DialogContent className="flex flex-col overflow-auto">
           <DialogHeader>
-            <DialogTitle>Request Order</DialogTitle>
+            <DialogTitle>Request Order / Get in Touch </DialogTitle>
             <DialogDescription>
               Fill out the form to request an order. Click submit when you're done.
             </DialogDescription>

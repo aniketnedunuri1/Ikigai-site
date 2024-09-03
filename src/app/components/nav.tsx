@@ -14,6 +14,9 @@ const navItems = {
   '/catalog': {
     name: 'CATALOG',
   },
+  '/faq': {
+    name: 'FAQ',
+  },
   'https://calendly.com/aniketnedunuri/30min': {
     name: 'CONTACT',
   },
