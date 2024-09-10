@@ -79,12 +79,12 @@ export function HeroTile() {
       <div className="text-sm">closes in 3 weeks</div>
     </div>
     <ul className="space-y-2">
-      <li className="flex items-center gap-2">
+      {/* <li className="flex items-center gap-2">
         <div className="w-2 h-2 bg-white rounded-full"></div>
         <span className="text-sm">
           orders of 10+ pieces get custom merch design
         </span>
-      </li>
+      </li> */}
       <li className="flex items-start gap-2">
         <div className="w-2 h-2 bg-white rounded-full mt-1"></div>
         <span className="text-sm">

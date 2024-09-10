@@ -14,15 +14,18 @@ const navItems = {
   '/catalog': {
     name: 'CATALOG',
   },
+  '/faq': {
+    name: 'FAQ',
+  },
   'https://calendly.com/aniketnedunuri/30min': {
-    name: 'CONTACT',
+    name: 'BOOK A CALL',
   },
 }
 
 export function Navbar() {
   const pathname = usePathname();
 
-  const isCatalogPage = pathname === '/catalog';
+  const isCatalogOrFAQPage = (pathname === '/catalog' || pathname === '/faq');
 
   return (
     <div className="lg:sticky">
@@ -40,14 +43,14 @@ export function Navbar() {
         </Link>
 
         {/* Navigation Items */}
-        <div className={`flex flex-col items-end text-sm sm:flex-row font-thin text-md ${isCatalogPage ? 'text-black' : 'text-white'}`}>
+        <div className={`flex flex-col items-end text-sm sm:flex-row font-thin text-md ${isCatalogOrFAQPage ? 'text-black' : 'text-white'}`}>
 
           {Object.entries(navItems).map(([path, { name }]) => {
             return (
               <Link
                 key={path}
                 href={path}
-                className={`transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1 ${isCatalogPage ? 'text-black' : 'text-white'}`}
+                className={`transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1 ${isCatalogOrFAQPage ? 'text-black' : 'text-white'}`}
               >
                 {name}
               </Link>
