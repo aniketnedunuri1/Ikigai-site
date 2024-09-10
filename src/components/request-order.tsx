@@ -49,9 +49,6 @@ const formSchema = z.object({
     message: "Invalid email address.",
   }),
   phone: z.string().optional(),
-  selectedTypes: z.array(z.string()).min(1, {
-    message: "At least one clothing type must be selected.",
-  }),
   details: z.string().optional()
 });
 
@@ -65,13 +62,28 @@ export function RequestOrder() {
       name: "",
       email: "",
       phone: "",
-      selectedTypes: [],
       details: "",
     },
   });
 
+  // const form = z.object({
+  //   name: z.string().min(2, {
+  //     message: "Username must be at least 2 characters.",
+  //   }),
+  //   emaial: z.string().min(2, {
+  //     message: "email must be at least 2 characters.",
+  //   }),
+  //   phone: z.number().min(10, {
+  //     message: "phone must be at least 2 characters.",
+  //   }),
+  //   details: z.string().min(1, {
+  //     message: "Username must be at least  characters.",
+  //   }),
+  // })
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
+    console.log("here")
     try {
       console.log(values);
       await submitForm(values);
@@ -92,6 +104,31 @@ export function RequestOrder() {
       setLoading(false);
     }
   }
+
+  // async function onSubmit(values: z.infer<typeof formSchema>) {
+  //   console.log("Form submission started"); // Added log for debugging
+  //   setLoading(true);
+  //   try {
+  //     console.log("Form values:", values); // Debugging the form values
+  //     await submitForm(values);
+  //     toast({
+  //       title: "Order Requested Successfully",
+  //       description: "We've received your order request and will process it shortly.",
+  //     });
+  //     setOpen(false);
+  //     form.reset();
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //     toast({
+  //       title: "Error",
+  //       description: "There was a problem submitting your order. Please try again.",
+  //       variant: "destructive",
+  //     });
+  //   } finally {
+  //     setLoading(false);
+  //     console.log("Form submission ended"); // Added log for debugging
+  //   }
+  // }
 
   function FormContent() {
     return (
@@ -164,29 +201,29 @@ export function RequestOrder() {
           )}
         </form>
       </Form>
-      );
-    }
-
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-
-        <DialogTrigger asChild>
-          <Button onClick={() => {console.log("clicked")}}variant="default">Request Order / Get in Touch</Button>
-        </DialogTrigger>
-
-        <DialogContent>
-         
-          <DialogHeader>
-            <DialogTitle>Request Order / Get in Touch </DialogTitle>
-            <DialogDescription>
-              Fill out the form to request an order. Click submit when you're done.
-            </DialogDescription>
-          </DialogHeader>
-
-          <FormContent />
-
-        </DialogContent>
-      </Dialog>
     );
- 
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+
+      <DialogTrigger asChild>
+        <Button onClick={() => { console.log("clicked") }} variant="default">Request Order / Get in Touch</Button>
+      </DialogTrigger>
+
+      <DialogContent>
+
+        <DialogHeader>
+          <DialogTitle>Request Order / Get in Touch </DialogTitle>
+          <DialogDescription>
+            Fill out the form to request an order. Click submit when you're done.
+          </DialogDescription>
+        </DialogHeader>
+
+        <FormContent />
+
+      </DialogContent>
+    </Dialog>
+  );
+
 }

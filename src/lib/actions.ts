@@ -6,7 +6,7 @@ const FormSchema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address"),
     phone: z.string().optional(),
-    selectedTypes: z.array(z.string()).min(1, "At least one clothing type must be selected"),
+    // selectedTypes: z.array(z.string()).min(1, "At least one clothing type must be selected"),
     details: z.string().optional(),
 });
 
@@ -21,13 +21,13 @@ export async function submitForm(data: FormData) {
   }
 
   try {
-      const { name, email, phone, selectedTypes, details } = parsedData.data;
+      const { name, email, phone, details } = parsedData.data;
 
-      const formattedSelectedTypes = `{${selectedTypes.join(',')}}`;
+    //   const formattedSelectedTypes = `{${selectedTypes.join(',')}}`;
 
       const result = await sql`
-          INSERT INTO form_submissions (name, email, phone, selected_types, details)
-          VALUES (${name}, ${email}, ${phone}, ${formattedSelectedTypes}, ${details})
+          INSERT INTO form_submissions (name, email, phone, details)
+          VALUES (${name}, ${email}, ${phone}, ${details})
           RETURNING *;
       `;
 
