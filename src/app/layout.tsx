@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { Navbar } from "./components/nav";
-import { HeroTile } from "./components/hero";
+import { Navbar } from "../components/nav";
+import { HeroTile } from "../components/hero";
 import { Toaster } from "../components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,12 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <body className="bg-white">
         <Navbar></Navbar>
-        <div>{children}</div>
+        {children}
+        <Analytics />
+        <Toaster/>
       </body>
-      <Analytics />
-      <Toaster/>
     </html>
   );
 }

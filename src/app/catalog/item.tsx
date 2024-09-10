@@ -86,6 +86,7 @@ export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Im
               alt={alt2}
               layout="fill"
               objectFit="contain"
+              draggable={false}
             />
           ) : (
             <Image
@@ -93,6 +94,7 @@ export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Im
               alt={alt1}
               layout="fill"
               objectFit="contain"
+              draggable={false}
             />
           )}
         </div>

@@ -35,11 +35,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { submitForm } from "../../lib/actions";
+import { submitForm } from "../lib/actions";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { useMediaQuery } from "../../lib/use-media-query";
-import { toast } from "../../components/ui/use-toast";
+import { useMediaQuery } from "../lib/use-media-query";
+import { toast } from "./ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -93,20 +93,8 @@ export function RequestOrder() {
     }
   }
 
-  const handleTypeToggle = (type: string) => {
-    const { selectedTypes } = form.getValues();
-    if (selectedTypes.includes(type)) {
-      form.setValue(
-        "selectedTypes",
-        selectedTypes.filter((t) => t !== type)
-      );
-    } else {
-      form.setValue("selectedTypes", [...selectedTypes, type]);
-    }
-  };
-
-  const FormContent = ({ className }: React.ComponentProps<"div">) => (
-    <div className={cn("space-y-8", className)}>
+  function FormContent() {
+    return (
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -148,37 +136,6 @@ export function RequestOrder() {
               </FormItem>
             )}
           />
-          {/* <div className="flex flex-wrap">
-            <FormField
-              control={form.control}
-              name="selectedTypes"
-              render={() => (
-                <FormItem>
-                  <FormLabel>Clothing</FormLabel>
-                  <FormControl>
-                    <div className="flex space-x-2">
-                      {["hoodies", "crewneck", "tshirts", "sweatpants"].map((type) => (
-                        <Button
-                          key={type}
-                          type="button"
-                          variant="outline"
-                          onClick={() => handleTypeToggle(type)}
-                          className={
-                            form.getValues().selectedTypes.includes(type)
-                              ? "bg-black text-white"
-                              : "bg-gray-200"
-                          }
-                        >
-                          {type.charAt(0).toUpperCase() + type.slice(1)}
-                        </Button>
-                      ))}
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div> */}
           <FormField
             control={form.control}
             name="details"
@@ -201,28 +158,33 @@ export function RequestOrder() {
               Please wait
             </Button>
           ) : (
-            <Button type="submit" className="bg-black text-white">
+            <Button type="submit" className="bg-black text-white z-50">
               Submit
             </Button>
           )}
         </form>
       </Form>
-    </div>
-  );
+      );
+    }
+
     return (
       <Dialog open={open} onOpenChange={setOpen}>
+
         <DialogTrigger asChild>
-          <Button variant="default">Request Order / Get in Touch</Button>
+          <Button onClick={() => {console.log("clicked")}}variant="default">Request Order / Get in Touch</Button>
         </DialogTrigger>
-        
-        <DialogContent className="flex flex-col overflow-auto">
+
+        <DialogContent>
+         
           <DialogHeader>
             <DialogTitle>Request Order / Get in Touch </DialogTitle>
             <DialogDescription>
               Fill out the form to request an order. Click submit when you're done.
             </DialogDescription>
           </DialogHeader>
+
           <FormContent />
+
         </DialogContent>
       </Dialog>
     );

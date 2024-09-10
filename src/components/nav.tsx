@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { newsreaderNormal } from '../../lib/fonts'
+import { newsreaderNormal } from '../lib/fonts'
 import { usePathname } from 'next/navigation';
 
 const navItems = {

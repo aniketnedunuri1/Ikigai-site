@@ -1,4 +1,4 @@
-import { HeroTile } from "../components/hero";
+import { HeroTile } from "../../components/hero";
 
 export default function BlogLayout({
   children,

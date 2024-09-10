@@ -1,5 +1,5 @@
 
-import { HeroTile } from "./components/hero";
+import { HeroTile } from "../components/hero";
 
 export default function Home() {
   return (

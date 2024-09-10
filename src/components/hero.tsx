@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import { newsreaderItalic, newsreaderNormal } from "../../lib/fonts";
+import { newsreaderItalic, newsreaderNormal } from "../lib/fonts";
 import { RequestOrder } from "./request-order";
 
 
@@ -43,8 +43,7 @@ export function HeroTile() {
           />
         </div>
   
-        <div className="flex flex-row gap-3 items-center">
-          {/* <Button className="max-w-xl">request order</Button> */}
+        <div className="max-w-32">
           <RequestOrder />
         </div>
       </>
