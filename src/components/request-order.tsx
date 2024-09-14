@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler, UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
@@ -15,19 +15,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -36,11 +25,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitForm } from "../lib/actions";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
-import { useMediaQuery } from "../lib/use-media-query";
 import { toast } from "./ui/use-toast";
 
+// Define the form schema using Zod
 const formSchema = z.object({
   name: z.string().min(1, {
     message: "Name is required.",
@@ -49,14 +36,100 @@ const formSchema = z.object({
     message: "Invalid email address.",
   }),
   phone: z.string().optional(),
-  details: z.string().optional()
+  details: z.string().optional(),
 });
 
-export function RequestOrder() {
-  const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = useState(false);
+// Infer the form schema TypeScript type from Zod schema
+type FormSchema = z.infer<typeof formSchema>;
 
-  const form = useForm<z.infer<typeof formSchema>>({
+// Define the props for FormContent component
+interface FormContentProps {
+  form: UseFormReturn<FormSchema>;
+  onSubmit: SubmitHandler<FormSchema>;
+  loading: boolean;
+}
+
+// Move FormContent outside of RequestOrder to prevent re-declaration on every render
+const FormContent: React.FC<FormContentProps> = React.memo(
+  ({ form, onSubmit, loading }) => (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input placeholder="Jane Doe" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="jane@example.com" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Phone</FormLabel>
+              <FormControl>
+                <Input placeholder="123-456-7890" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="details"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Additional Information</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Enter any inquiries/needs here"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {loading ? (
+          <Button disabled>
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            Please wait
+          </Button>
+        ) : (
+          <Button type="submit" className="bg-black text-white z-50">
+            Submit
+          </Button>
+        )}
+      </form>
+    </Form>
+  )
+);
+
+export function RequestOrder() {
+  const [open, setOpen] = React.useState<boolean>(false);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  // Initialize the form using React Hook Form and Zod for validation
+  const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -66,164 +139,48 @@ export function RequestOrder() {
     },
   });
 
-  // const form = z.object({
-  //   name: z.string().min(2, {
-  //     message: "Username must be at least 2 characters.",
-  //   }),
-  //   emaial: z.string().min(2, {
-  //     message: "email must be at least 2 characters.",
-  //   }),
-  //   phone: z.number().min(10, {
-  //     message: "phone must be at least 2 characters.",
-  //   }),
-  //   details: z.string().min(1, {
-  //     message: "Username must be at least  characters.",
-  //   }),
-  // })
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setLoading(true);
-    console.log("here")
-    try {
-      console.log(values);
-      await submitForm(values);
-      toast({
-        title: "Order Requested Successfully",
-        description: "We've received your order request and will process it shortly.",
-      });
-      setOpen(false);
-      form.reset();
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast({
-        title: "Error",
-        description: "There was a problem submitting your order. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  // async function onSubmit(values: z.infer<typeof formSchema>) {
-  //   console.log("Form submission started"); // Added log for debugging
-  //   setLoading(true);
-  //   try {
-  //     console.log("Form values:", values); // Debugging the form values
-  //     await submitForm(values);
-  //     toast({
-  //       title: "Order Requested Successfully",
-  //       description: "We've received your order request and will process it shortly.",
-  //     });
-  //     setOpen(false);
-  //     form.reset();
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //     toast({
-  //       title: "Error",
-  //       description: "There was a problem submitting your order. Please try again.",
-  //       variant: "destructive",
-  //     });
-  //   } finally {
-  //     setLoading(false);
-  //     console.log("Form submission ended"); // Added log for debugging
-  //   }
-  // }
-
-  function FormContent() {
-    return (
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Jane Doe" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="jane@example.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone</FormLabel>
-                <FormControl>
-                  <Input placeholder="123-456-7890" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="details"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Additional Information</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Enter any inquiries/needs here"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          {loading ? (
-            <Button disabled>
-              <ReloadIcon className="mr-2 h-4 w-4 animate-spin outline outline-1 outline-black" />
-              Please wait
-            </Button>
-          ) : (
-            <Button type="submit" className="bg-black text-white z-50">
-              Submit
-            </Button>
-          )}
-        </form>
-      </Form>
-    );
-  }
+  // Handle form submission
+  const onSubmit: SubmitHandler<FormSchema> = React.useCallback(
+    async (values) => {
+      setLoading(true);
+      try {
+        await submitForm(values);
+        toast({
+          title: "Order Requested Successfully",
+          description:
+            "We've received your order request and will process it shortly.",
+        });
+        setOpen(false);
+        form.reset();
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        toast({
+          title: "Error",
+          description:
+            "There was a problem submitting your order. Please try again.",
+          variant: "destructive",
+        });
+      } finally {
+        setLoading(false);
+      }
+    },
+    [form]
+  );
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-
       <DialogTrigger asChild>
-        <Button onClick={() => { console.log("clicked") }} variant="default">Request Order / Get in Touch</Button>
+        <Button variant="default">Request Order / Get in Touch</Button>
       </DialogTrigger>
-
       <DialogContent>
-
         <DialogHeader>
-          <DialogTitle>Request Order / Get in Touch </DialogTitle>
+          <DialogTitle>Request Order / Get in Touch</DialogTitle>
           <DialogDescription>
             Fill out the form to request an order. Click submit when you're done.
           </DialogDescription>
         </DialogHeader>
-
-        <FormContent />
-
+        <FormContent form={form} onSubmit={onSubmit} loading={loading} />
       </DialogContent>
     </Dialog>
   );
-
 }
