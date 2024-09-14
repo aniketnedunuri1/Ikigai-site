@@ -8,7 +8,7 @@ import { Toaster } from "../components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Couture - Ikigai Clothing | Company & Club Merch Done Right",
+  title: "Couture | Premium Company & Club Merch",
   description:
     "Discover couture and ikigai-inspired clothing for your company and club. High-quality merch from top suppliers.",
   keywords: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "apparel",
   ],
   openGraph: {
-    title: "Couture - Ikigai Clothing | Company & Club Merch Done Right",
+    title: "Couture | Premium Company & Club Merch",
     description:
       "Discover couture and ikigai-inspired clothing for your company and club. High-quality merch from top suppliers.",
     url: "https://couturebyikigai.com",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@your_twitter_handle", 
     creator: "@your_twitter_handle",
-    title: "Couture - Ikigai Clothing | Company & Club Merch Done Right",
+    title: "Couture | Premium Custom Company & Club Merch",
     description:
       "Discover couture and ikigai-inspired clothing for your company and club. High-quality merch from top suppliers.",
     images: ["https://couturebyikigai.com/thumbnail.png"],
