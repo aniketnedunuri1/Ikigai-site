@@ -2,6 +2,11 @@
 import { z } from "zod";
 import { sql } from '@vercel/postgres';
 
+import { PrismaClient } from "@prisma/client";
+
+
+const prisma = new PrismaClient();
+
 const FormSchema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address"),
@@ -25,18 +30,21 @@ export async function submitForm(data: FormData) {
 
     //   const formattedSelectedTypes = `{${selectedTypes.join(',')}}`;
 
-      const result = await sql`
-          INSERT INTO form_submissions (name, email, phone, details)
-          VALUES (${name}, ${email}, ${phone}, ${details})
-          RETURNING *;
-      `;
+        const data = await prisma.ikigaiRequests.create({
+            data: {
+                name: name,
+                email: email,
+                phone: phone,
+                details: details,
+                timestamp: new Date(),
+            }
+        })
 
-      console.log("Form data saved:", result.rows[0]);
-
+        console.log("[Form Actions] Saved Form Data", data)
       return {
           success: true,
           message: "Form submitted successfully!",
-          data: result.rows[0],
+          data: data,
       };
   } catch (error: any) {
       console.error("Failed to submit form:", error);
