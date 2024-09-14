@@ -28,16 +28,20 @@
 // }
 
 "use client";
+import { AlertCircleIcon, RocketIcon } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
 import Item from "./item";
 
 export default function Page() {
   return (
     <section className="flex flex-col justify-center items-center min-h-screen space-y-8 mt-10 sm:mt-20">
       {/* Italic text at the top center */}
-      <div className="text-center px-4">
-        <p className="italic text-base sm:text-lg">
-          *We offer any color choice and full customizability of designs*
-        </p>
+      <div className="text-left px-4">
+        <Alert>
+          <AlertDescription>
+          We offer any color choice and full customizability of designs.
+          </AlertDescription>
+        </Alert>
       </div>
 
       {/* Items */}

@@ -39,17 +39,14 @@ const formSchema = z.object({
   details: z.string().optional(),
 });
 
-// Infer the form schema TypeScript type from Zod schema
 type FormSchema = z.infer<typeof formSchema>;
 
-// Define the props for FormContent component
 interface FormContentProps {
   form: UseFormReturn<FormSchema>;
   onSubmit: SubmitHandler<FormSchema>;
   loading: boolean;
 }
 
-// Move FormContent outside of RequestOrder to prevent re-declaration on every render
 const FormContent: React.FC<FormContentProps> = React.memo(
   ({ form, onSubmit, loading }) => (
     <Form {...form}>
@@ -128,7 +125,6 @@ export function RequestOrder() {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  // Initialize the form using React Hook Form and Zod for validation
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -139,7 +135,6 @@ export function RequestOrder() {
     },
   });
 
-  // Handle form submission
   const onSubmit: SubmitHandler<FormSchema> = React.useCallback(
     async (values) => {
       setLoading(true);

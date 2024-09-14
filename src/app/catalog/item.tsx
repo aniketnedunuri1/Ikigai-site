@@ -55,6 +55,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Alert, AlertDescription, AlertTitle } from '../../components/ui/alert';
 
 interface ItemProps {
   src1: string; // Front image source
@@ -69,12 +70,21 @@ export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Im
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Card className="w-full sm:w-96 mx-2 sm:mx-4 shadow-none border-none bg-transparent">
+    <Card className="w-full sm:w-96 mx-2 sm:mx-4 shadow-none border-none bg-slate-400/5">
       <CardHeader>
-        <CardTitle className="text-center text-lg sm:text-xl font-normal">{title}</CardTitle>
+        <Alert>
+          <AlertTitle>
+          {title}
+
+          </AlertTitle>
+
+          <AlertDescription>
+            {desc}
+          </AlertDescription>
+        </Alert>
+
       </CardHeader>
       <CardContent>
-        <span className="flex justify-center text-center italic text-sm sm:text-base">{desc}</span>
         <div
           className="relative w-full h-72 sm:h-96"
           onMouseEnter={() => setIsHovered(true)}
