@@ -37,14 +37,6 @@ export default function RootLayout({
           }}
         />      </head>
       <body className={inter.className + " bg-white"}>
-          <noscript
-          dangerouslySetInnerHTML={{
-            __html: `
-              <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T9XSS3M9"
-              height="0" width="0" style="display:none;visibility:hidden"></iframe>
-            `,
-          }}
-        />
         <Navbar />
         {children}
         <Analytics />
