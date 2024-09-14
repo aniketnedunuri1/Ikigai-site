@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Couture | Premium Company & Club Merch",
   description:
-    "Discover couture and ikigai-inspired clothing for your company and club. High-quality merch from top suppliers.",
+    "High quality 400 GSM+ merchandise at Custom-Ink prices with full customization, no design restrictions, and in-house white-glove service—without the markups.",
   keywords: [
     "couture",
     "ikigai",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Couture | Premium Company & Club Merch",
     description:
-      "Discover couture and ikigai-inspired clothing for your company and club. High-quality merch from top suppliers.",
+      "High quality 400 GSM+ merchandise at Custom-Ink prices with full customization, no design restrictions, and in-house white-glove service—without the markups.",
     url: "https://couturebyikigai.com",
     siteName: "Couture",
     images: [
