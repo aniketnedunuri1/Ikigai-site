@@ -17,6 +17,16 @@ const FormSchema = z.object({
 
 type FormData = z.infer<typeof FormSchema>;
 
+
+
+const FormSchemaMailingList = z.object({
+    name: z.string().optional(),
+    email: z.string().email("Invalid email address"),
+
+});
+
+type FormDataMailingList = z.infer<typeof FormSchemaMailingList>;
+
 export async function submitForm(data: FormData) {
   const parsedData = FormSchema.safeParse(data);
 
@@ -51,3 +61,41 @@ export async function submitForm(data: FormData) {
       throw new Error("Failed to submit form: " + error.message);
   }
 }
+
+
+
+export async function submitMailingListForm(data: FormDataMailingList) {
+    const parsedData = FormSchema.safeParse(data);
+  
+    if (!parsedData.success) {
+        console.error("Validation failed:", parsedData.error.format());
+        throw new Error("Validation failed: " + JSON.stringify(parsedData.error.format()));
+    }
+  
+    try {
+        const { name, email } = parsedData.data;
+  
+      //   const formattedSelectedTypes = `{${selectedTypes.join(',')}}`;
+  
+          const data = await prisma.emailList.create({
+              data: {
+                  name: name,
+                  email: email,
+
+              }
+          })
+  
+          console.log("[Form Actions] Saved Form Data", data)
+        return {
+            success: true,
+            message: "Form submitted successfully!",
+            data: data,
+        };
+    } catch (error: any) {
+        console.error("Failed to submit form:", error);
+        throw new Error("Failed to submit form: " + error.message);
+    }
+  }
+  
+  
+  
