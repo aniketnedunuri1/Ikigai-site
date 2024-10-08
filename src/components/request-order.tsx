@@ -165,7 +165,7 @@ export function RequestOrder() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="default">Request Order / Get in Touch</Button>
+        <Button variant="outline">Request Order / Get in Touch</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
