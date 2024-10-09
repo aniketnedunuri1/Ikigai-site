@@ -6,7 +6,7 @@ import { RequestOrder } from "./request-order";
 
 export function HeroTile() {
     return(
-      <div className="flex flex-col justify-center gap-12 sm:h-dvh w-full p-4 sm:p-8">
+      <div className="flex flex-col justify-center gap-12 min-h-screen w-full p-4 sm:p-8">
         <Hero></Hero>
         {/* <InformationFooter></InformationFooter> */}
       </div>
@@ -19,12 +19,12 @@ export function HeroTile() {
         {/* Hero Pill, Text, and Images */}
   
         <div>
-          <div className="flex flex-row items-center gap-3 outline outline-[0.5px] outline-white p-1 px-3 rounded-full w-[200px] bg-white/5 mt-48 sm:mt-0">
+          {/* <div className="flex flex-row items-center gap-3 outline outline-[0.5px] outline-white p-1 px-3 rounded-full w-[200px] bg-white/5 mt-48 sm:mt-0">
             <div className="w-2 h-2 bg-white rounded-full"></div>
             <div className="text-white text-sm font-thin whitespace-normal break-words">
               we do full customization
             </div>
-          </div>
+          </div> */}
   
           {/* Hero Text */}
           <div
@@ -54,7 +54,7 @@ export function HeroTile() {
   // function InformationFooter() {
   //   return(
   //   <div className="text-white sm:absolute bottom-0 left-0 sm:p-8">
-  //   {/* <div className="flex items-center gap-2 mb-4">
+  //   <div className="flex items-center gap-2 mb-4">
   //     <svg
   //       width="15"
   //       height="15"
@@ -76,15 +76,15 @@ export function HeroTile() {
   //       </defs>
   //     </svg>
   //     <div className="text-sm">closes in 3 weeks</div>
-  //   </div> */}
+  //   </div>
   //   <ul className="space-y-2">
-  //     {/* <li className="flex items-center gap-2">
+  //     <li className="flex items-center gap-2">
   //       <div className="w-2 h-2 bg-white rounded-full"></div>
   //       <span className="text-sm">
   //         orders of 10+ pieces get custom merch design
   //       </span>
-  //     </li> */}
-  //     {/* <li className="flex items-start gap-2">
+  //     </li>
+  //     <li className="flex items-start gap-2">
   //       <div className="w-2 h-2 bg-white rounded-full mt-1"></div>
   //       <span className="text-sm">
   //         starting at{" "}
@@ -92,7 +92,7 @@ export function HeroTile() {
   //           $20/piece
   //         </span>
   //       </span>
-  //     </li> */}
+  //     </li>
   //   </ul>
   // </div>);
   

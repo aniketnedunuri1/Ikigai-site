@@ -239,6 +239,15 @@ ol {
   overflow: hidden; /* Ensure orbiting elements don't overflow */
 }
 
+.hero-tile {
+  min-height: 100vh; /* Forces the HeroTile to take up full screen height */
+}
+
+.bg-cover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 /* Couture SVG */
 .big {
   position: absolute;
