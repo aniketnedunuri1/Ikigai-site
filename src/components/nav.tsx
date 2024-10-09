@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { newsreaderNormal } from '../lib/fonts'
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 const navItems = {
   // '/about': {
@@ -24,7 +25,8 @@ const navItems = {
 
 export function Navbar() {
   const pathname = usePathname();
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => setMenuOpen(!menuOpen);
   const isCatalogOrFAQPage = (pathname === '/catalog' || pathname === '/faq');
 
   return (
@@ -42,9 +44,32 @@ export function Navbar() {
           </div>
         </Link>
 
-        {/* Navigation Items */}
-        <div className={`flex flex-col items-end text-sm sm:flex-row font-thin text-md ${isCatalogOrFAQPage ? 'text-black' : 'text-white'}`}>
+        <div className="sm:hidden">
+          <button
+            onClick={toggleMenu}
+            className="focus:outline-none text-white"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
+            </svg>
+          </button>
+        </div>
 
+
+        {/* Navigation Items */}
+
+        <div className={`hidden sm:flex flex-col items-end text-sm sm:flex-row font-thin text-md ${isCatalogOrFAQPage ? 'text-black' : 'text-white'}`}>
           {Object.entries(navItems).map(([path, { name }]) => {
             return (
               <Link
@@ -57,6 +82,37 @@ export function Navbar() {
             )
           })}
         </div>
+
+        {/* Mobile Menu - shown when menuOpen is true */}
+        {menuOpen && (
+          <div className="sm:hidden absolute top-20 right-0 w-40 text-right p-4 space-y-2 rounded-lg shadow-lg">
+            {Object.entries(navItems).map(([path, { name }]) => (
+              <Link
+                key={path}
+                href={path}
+                className="block transition-all hover:text-neutral-800 dark:hover:text-neutral-200 text-white py-1 px-2"
+                onClick={() => setMenuOpen(false)}  // Close menu when link is clicked
+              >
+                {name}
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* <div className={`flex flex-col items-end text-sm sm:flex-row font-thin text-md ${isCatalogOrFAQPage ? 'text-black' : 'text-white'}`}>
+
+          {Object.entries(navItems).map(([path, { name }]) => {
+            return (
+              <Link
+                key={path}
+                href={path}
+                className={`transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1 ${isCatalogOrFAQPage ? 'text-black' : 'text-white'}`}
+              >
+                {name}
+              </Link>
+            )
+          })}
+        </div> */}
       </nav>
     </div>
   )
