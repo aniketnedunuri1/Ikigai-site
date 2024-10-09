@@ -124,6 +124,7 @@ const FormContent: React.FC<FormContentProps> = React.memo(
 export function RequestOrder() {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [thankYouDialogOpen, setThankYouDialogOpen] = React.useState<boolean>(false);
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -140,12 +141,13 @@ export function RequestOrder() {
       setLoading(true);
       try {
         await submitForm(values);
-        toast({
-          title: "Order Requested Successfully",
-          description:
-            "We've received your order request and will process it shortly.",
-        });
+        // toast({
+        //   title: "Order Requested Successfully",
+        //   description:
+        //     "We've received your order request and will process it shortly.",
+        // });
         setOpen(false);
+        setThankYouDialogOpen(true);
         form.reset();
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -163,19 +165,40 @@ export function RequestOrder() {
   );
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline">Request Order / Get in Touch</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Request Order / Get in Touch</DialogTitle>
-          <DialogDescription>
-            Fill out the form to request an order. Click submit when you're done.
-          </DialogDescription>
-        </DialogHeader>
-        <FormContent form={form} onSubmit={onSubmit} loading={loading} />
-      </DialogContent>
-    </Dialog>
+    <>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
+          <Button variant="outline">Request Order / Get in Touch</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Request Order / Get in Touch</DialogTitle>
+            <DialogDescription>
+              Fill out the form to request an order. Click submit when you're done.
+            </DialogDescription>
+          </DialogHeader>
+          <FormContent form={form} onSubmit={onSubmit} loading={loading} />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={thankYouDialogOpen} onOpenChange={setThankYouDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Thank you for your inquiry !</DialogTitle>
+            <DialogDescription>
+              We will reach out to you within the next day or two
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-5">
+            <p>Next Steps:</p>
+            <ul className="list-disc ml-4 space-y-4">
+              <li>Be on the lookout for a text from Aniket (732-997-8157) or Anshul (908-798-1235) </li>
+              <li>Email us any logos at couturebyikigai@gmail.com </li>
+              <li>If you have any questions, don't hesitate to reach out :) </li>
+            </ul>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
