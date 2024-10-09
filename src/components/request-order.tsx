@@ -184,7 +184,7 @@ export function RequestOrder() {
       <Dialog open={thankYouDialogOpen} onOpenChange={setThankYouDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Thank you for your inquiry !</DialogTitle>
+            <DialogTitle>Thank you for your inquiry!</DialogTitle>
             <DialogDescription>
               We will reach out to you within the next day or two
             </DialogDescription>
@@ -194,7 +194,7 @@ export function RequestOrder() {
             <ul className="list-disc ml-4 space-y-4">
               <li>Be on the lookout for a text from Aniket (732-997-8157) or Anshul (908-798-1235) </li>
               <li>Email us any logos at couturebyikigai@gmail.com </li>
-              <li>If you have any questions, don't hesitate to reach out :) </li>
+              <li>If you have any questions, don't hesitate to reach out</li>
             </ul>
           </div>
         </DialogContent>
