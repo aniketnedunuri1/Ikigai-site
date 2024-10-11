@@ -9,6 +9,7 @@ export default function Home() {
       </div>
       
       <div className="hidden sm:block sm:col-span-2 bg-black h-full w-full bg-[url('/background.png')] bg-cover bg-center"></div>
+     
     </div>
   );
 }

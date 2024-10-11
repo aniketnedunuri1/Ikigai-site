@@ -90,7 +90,7 @@ export function Navbar() {
               <Link
                 key={path}
                 href={path}
-                className="block transition-all hover:text-neutral-800 dark:hover:text-neutral-200 text-white py-1 px-2"
+                className="block transition-all hover:text-neutral-800 dark:hover:text-neutral-200 text-black py-1 px-2"
                 onClick={() => setMenuOpen(false)}  // Close menu when link is clicked
               >
                 {name}
