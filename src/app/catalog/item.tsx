@@ -56,18 +56,66 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '../../components/ui/alert';
+import { Button } from '@/components/ui/button';
 
 interface ItemProps {
-  src1: string; // Front image source
-  src2: string; // Back image source
-  alt1?: string; // Alt text for the front image
-  alt2?: string; // Alt text for the back image
-  title: string; // Title text for the card
+  src1: string;
+  src2: string;
+  alt1?: string;
+  alt2?: string;
+  title: string;
   desc: string;
+  onAddToCart: (item: CartItem) => void;
 }
 
-export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Image', title, desc }: ItemProps) {
+export interface CartItem {
+  title: string;
+  quantity: number;
+  price: number;
+}
+
+export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Image', title, desc, onAddToCart }: ItemProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [quantity, setQuantity] = useState(1); // State for quantity
+
+  const handleAddToCart = () => {
+    onAddToCart({ title, quantity, price: 2000 }); // Example price
+  };
+
+
+
+  const handleCheckout = async () => {
+    try {
+      const res = await fetch('/api/create-checkout-session', {  // Correct API route
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          line_items: [
+            {
+              price_data: {
+                currency: 'usd',
+                product_data: {
+                  name: title,
+                },
+                unit_amount: 2000, // Example amount in cents
+              },
+              quantity: 1,
+            },
+          ],
+        }),
+      });
+
+      const { url } = await res.json();
+      if (url) {
+        window.location.href = url; // Redirect to Stripe Checkout
+      }
+    } catch (error) {
+      console.error('Error creating Stripe checkout session:', error);
+    }
+  };
+
 
   return (
     <Card className="w-full sm:w-96 mx-2 sm:mx-4 shadow-none border-none bg-slate-400/5">
@@ -108,6 +156,22 @@ export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Im
             />
           )}
         </div>
+        <div className="flex items-center space-x-2 mt-4">
+          <label htmlFor="quantity" className="text-sm">Quantity:</label>
+          <input
+            id="quantity"
+            type="number"
+            min="1"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+            className="w-16 px-2 py-1 border rounded"
+          />
+        </div>
+
+        <Button variant="default"className="mt-4" onClick={handleAddToCart}>Add to Cart</Button>
+
+        <Button variant="link" onClick={handleCheckout}>Checkout</Button>
+
       </CardContent>
     </Card>
   );
