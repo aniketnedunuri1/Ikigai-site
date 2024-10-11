@@ -27,6 +27,7 @@ export function HeroTile() {
           </div> */}
   
           {/* Hero Text */}
+      
           <div
             className={`${newsreaderNormal.className} text-white text-3xl sm:text-[36px] max-w-md my-6`}
           >

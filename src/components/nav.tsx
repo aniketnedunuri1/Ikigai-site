@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { newsreaderNormal } from '../lib/fonts'
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import Image from 'next/image'
 
 const navItems = {
   // '/about': {
@@ -35,12 +36,14 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/">
           <div className="flex flex-col cursor-pointer">
-            <div className={`${newsreaderNormal.className} text-white text-5xl`}>
+            {/* <div className={`${newsreaderNormal.className} text-white text-5xl`}>
               Couture
             </div>
             <div className="text-white font-thin">
               by Ikigai
-            </div>
+            </div> */}
+          <Image src="/couture-ikigai.svg" alt="Couture" width = {200} height = {200} />
+         
           </div>
         </Link>
 
