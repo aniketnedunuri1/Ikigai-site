@@ -65,13 +65,13 @@ export default function Page() {
       {/* Items */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <Item src1="/catalog/hoodie_front.png" src2="/catalog/hoodie_back.png" title="HOODIE" 
-        desc="Heavyweight 100% Cotton Blend. Slightly oversized, baggier fit."  onAddToCart={handleAddToCart}/>
+        desc="Heavyweight 100% Cotton Blend. Slightly oversized, baggier fit."  onAddToCart={handleAddToCart}productUrl="/catalog/hoodie"/>
         <Item src1="/catalog/crew_front.png" src2="/catalog/crew_back.png" title="CREW"  
-        desc="Heavyweight 100% Cotton Blend. Slightly oversized, baggier fit." onAddToCart={handleAddToCart}/>
+        desc="Heavyweight 100% Cotton Blend. Slightly oversized, baggier fit." onAddToCart={handleAddToCart}productUrl="/catalog/crew"/>
         <Item src1="/catalog/ikigai_pants_front.png" src2="/catalog/ikigai_pants_back.png" title="SWEATS"
-        desc="Midweight French Terry Cotton Blend. Standard Fit." onAddToCart={handleAddToCart}/>
+        desc="Midweight French Terry Cotton Blend. Standard Fit." onAddToCart={handleAddToCart}productUrl="/catalog/sweats"/>
         <Item src1="/catalog/shirt_front.png" src2="/catalog/shirt_back.png" title="TEE" 
-        desc="Heavyweight / Midweight 100% Cotton Blend. Regular & Oversized Fit available." onAddToCart={handleAddToCart}/>
+        desc="Heavyweight / Midweight 100% Cotton Blend. Regular & Oversized Fit available." onAddToCart={handleAddToCart} productUrl="/catalog/tee"/>
       </div>
 
       <div className="mt-8">
