@@ -122,7 +122,6 @@
 "use client";
 import Image from 'next/image';
 
-
 export default function Page() {
     return (
         <div className="relative text-white bg-[#1e3832] overflow-hidden min-h-screen flex flex-col justify-center items-center">
