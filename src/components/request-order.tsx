@@ -120,8 +120,12 @@ const FormContent: React.FC<FormContentProps> = React.memo(
     </Form>
   )
 );
+type ButtonVariant = "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
 
-export function RequestOrder() {
+interface RequestOrderProps {
+  variant: ButtonVariant;
+}
+export function RequestOrder({variant}: RequestOrderProps) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [thankYouDialogOpen, setThankYouDialogOpen] = React.useState<boolean>(false);
@@ -168,7 +172,7 @@ export function RequestOrder() {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">Request Order / Get in Touch</Button>
+          <Button variant="secondary">Request Order / Get in Touch</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>

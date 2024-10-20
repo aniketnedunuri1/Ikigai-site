@@ -59,6 +59,7 @@
 // }
 
 "use client";
+import { RequestOrder } from '@/components/request-order';
 import Image from 'next/image';
 
 export default function Page() {
@@ -78,10 +79,17 @@ export default function Page() {
             {/* Text Content */}
             <div className="text-center max-w-3xl mx-auto mb-12">
                 <h1 className="text-5xl text-black font-bold mt-10 mb-4">GALLERY</h1>
-                <p className="mb-4">
+                {/* <p className="mb-4">
                     NOT&nbsp;&nbsp;&nbsp;NORMAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MERCH
-                </p>
+                </p> */}
+
+                <RequestOrder variant="secondary"/>
             </div>
+
+            
+
+
+            
 
             {/* Square Grid Layout */}
             <div className="flex justify-center items-center relative z-30">

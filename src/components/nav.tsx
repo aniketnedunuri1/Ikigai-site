@@ -22,6 +22,9 @@ const navItems = {
   'https://calendly.com/aniketnedunuri/30min': {
     name: 'BOOK A CALL',
   },
+  '/gallery': {
+    name: 'GALLERY',
+  }
 }
 
 export function Navbar() {
