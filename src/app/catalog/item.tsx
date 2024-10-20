@@ -11,7 +11,6 @@ interface ItemProps {
   alt2?: string;
   title: string;
   desc: string;
-  onAddToCart: (item: CartItem) => void;
   productUrl: string; // URL to the product info page
 }
 
@@ -21,7 +20,7 @@ export interface CartItem {
   price: number;
 }
 
-export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Image', title, desc, onAddToCart, productUrl }: ItemProps) {
+export default function Item({ src1, src2, alt1 = 'Front Image', alt2 = 'Back Image', title, desc, productUrl }: ItemProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleRedirect = () => {
