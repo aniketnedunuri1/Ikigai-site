@@ -49,12 +49,34 @@ export async function submitForm(data: FormData) {
             }
         })
 
-        const { data, error } = await resend.emails.send({
-            from: 'Acme <admin@couturebyikigai.com>',
-            to: ['aniketn16@gmail.com', 'areebk@umich.edu', 'couturebyikigai@gmail.com'],
-            subject: `${response.name} just signed up. Their email is: ${response.email}, and phone is ${response.phone}`,
-            html: '<strong>It works!</strong>',
-        });
+        // const { data, error } = await resend.emails.send({
+        //     from: 'Acme <admin@couturebyikigai.com>',
+        //     to: ['aniketn16@gmail.com', 'areebk@umich.edu', 'couturebyikigai@gmail.com'],
+        //     subject: `${response.name} just signed up. Their email is: ${response.email}, and phone is ${response.phone}`,
+        //     html: '<strong>It works!</strong>',
+        // });
+
+        // const { abc, error } = await resend.emails.send({
+        //     from: 'Couture by Ikigai <couturebyikigai@gmail.com>',
+        //     to: [`${response.email}`],
+        //     subject: `Thanks for reaching out to Couture by Ikigai! We will reach out shortly`,
+        //     html: '<strong>We will reach out shortly</strong>',
+        // });
+
+        await resend.batch.send([
+            {
+              from: 'Acme <admin@couturebyikigai.com>',
+              to: ['couturebyikigai@gmail.com'],
+              subject: `${response.name} just signed up. Their email is: ${response.email}, and phone is ${response.phone}`,
+              html: '<h1>it works!</h1>',
+            },
+            {
+              from: 'Couture by Ikigai <couturebyikigai@gmail.com>',
+              to: [`${response.email}`],
+              subject: `Thanks for reaching out to Couture by Ikigai! We will reach out shortly`,
+              html: '<strong>We will reach out shortly</strong>',
+            },
+          ]);
         
 
         console.log("[Form Actions] Saved Form Data", response)
