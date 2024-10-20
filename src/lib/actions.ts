@@ -63,7 +63,7 @@ export async function submitForm(data: FormData) {
         //     html: '<strong>We will reach out shortly</strong>',
         // });
 
-        await resend.batch.send([
+        const {data, error } = await resend.batch.send([
             {
               from: 'Acme <admin@couturebyikigai.com>',
               to: ['couturebyikigai@gmail.com'],
