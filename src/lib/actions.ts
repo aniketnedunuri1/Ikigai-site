@@ -1,10 +1,11 @@
 "use server"
 import { z } from "zod";
 import { sql } from '@vercel/postgres';
-
 import { PrismaClient } from "@prisma/client";
+import { Resend } from 'resend';
+import { getMaxListeners } from "events";
 
-
+const resend = new Resend('re_SAjvryp6_3vVeEwi2mEiUgX29SU9WAgyL');
 const prisma = new PrismaClient();
 
 const FormSchema = z.object({
@@ -22,11 +23,9 @@ type FormData = z.infer<typeof FormSchema>;
 const FormSchemaMailingList = z.object({
     name: z.string().optional(),
     email: z.string().email("Invalid email address"),
-
 });
 
 type FormDataMailingList = z.infer<typeof FormSchemaMailingList>;
-
 export async function submitForm(data: FormData) {
   const parsedData = FormSchema.safeParse(data);
 
@@ -40,7 +39,7 @@ export async function submitForm(data: FormData) {
 
     //   const formattedSelectedTypes = `{${selectedTypes.join(',')}}`;
 
-        const data = await prisma.ikigaiRequests.create({
+        const response = await prisma.ikigaiRequests.create({
             data: {
                 name: name,
                 email: email,
@@ -50,11 +49,18 @@ export async function submitForm(data: FormData) {
             }
         })
 
-        console.log("[Form Actions] Saved Form Data", data)
+        const { data, error } = await resend.emails.send({
+            from: 'Acme <admin@couturebyikigai.com>',
+            to: ['aniketn16@gmail.com', 'areebk@umich.edu', 'couturebyikigai@gmail.com'],
+            subject: `${response.name} just signed up. Their email is: ${response.email}, and phone is ${response.phone}`,
+            html: '<strong>It works!</strong>',
+        });
+        
+
+        console.log("[Form Actions] Saved Form Data", response)
       return {
           success: true,
           message: "Form submitted successfully!",
-          data: data,
       };
   } catch (error: any) {
       console.error("Failed to submit form:", error);
