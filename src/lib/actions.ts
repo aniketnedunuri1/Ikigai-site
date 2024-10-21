@@ -82,14 +82,14 @@ export async function submitForm(data: FormData) {
         
         const { data, error } = await resend.batch.send([
             {
-              from: 'Acme <admin@couturebyikigai.com>',
+              from: 'Couture by Ikigai <noreply@couturebyikigai.com>',
               to: ['couturebyikigai@gmail.com'],
               subject: `${response.name} just signed up. Their email is: ${response.email}, and phone is ${response.phone}`,
               replyTo: 'couturebyikigai@gmail.com',
-              html: '<h1>It works!</h1>',
+              html: '<h1>Anotha one</h1>',
             },
             {
-              from: 'Acme <admin@couturebyikigai.com>',
+              from: 'Couture by Ikigai <noreply@couturebyikigai.com>',
               to: [`${response.email}`],
               subject: `Thanks for reaching out to Couture by Ikigai! Here are your next steps`,
               replyTo: 'couturebyikigai@gmail.com',
