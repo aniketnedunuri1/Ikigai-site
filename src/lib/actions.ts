@@ -63,23 +63,96 @@ export async function submitForm(data: FormData) {
         //     html: '<strong>We will reach out shortly</strong>',
         // });
 
-        const {data, error } = await resend.batch.send([
+        // const {data, error } = await resend.batch.send([
+        //     {
+        //       from: 'Acme <admin@couturebyikigai.com>',
+        //       to: ['couturebyikigai@gmail.com'],
+        //       subject: `${response.name} just signed up. Their email is: ${response.email}, and phone is ${response.phone}`,
+        //       replyTo: 'couturebyikigai@gmail.com',
+        //       html: '<h1>it works!</h1>',
+        //     },
+        //     {
+        //       from: 'Acme <admin@couturebyikigai.com>',
+        //       to: [`${response.email}`],
+        //       subject: `Thanks for reaching out to Couture by Ikigai! We will reach out shortly`,
+        //       replyTo: 'couturebyikigai@gmail.com',
+        //       html: '<strong>We will reach out shortly</strong>',
+        //     },
+        //   ]);
+        
+        const { data, error } = await resend.batch.send([
             {
               from: 'Acme <admin@couturebyikigai.com>',
               to: ['couturebyikigai@gmail.com'],
               subject: `${response.name} just signed up. Their email is: ${response.email}, and phone is ${response.phone}`,
               replyTo: 'couturebyikigai@gmail.com',
-              html: '<h1>it works!</h1>',
+              html: '<h1>It works!</h1>',
             },
             {
               from: 'Acme <admin@couturebyikigai.com>',
               to: [`${response.email}`],
-              subject: `Thanks for reaching out to Couture by Ikigai! We will reach out shortly`,
+              subject: `Thanks for reaching out to Couture by Ikigai! Here are your next steps`,
               replyTo: 'couturebyikigai@gmail.com',
-              html: '<strong>We will reach out shortly</strong>',
+              html: `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Thanks for your inquiry! </title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            padding: 20px;
+                        }
+                        .container {
+                            max-width: 600px;
+                            margin: 0 auto;
+                            background-color: #ffffff;
+                            padding: 20px;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                        }
+                        h1 {
+                            font-size: 24px;
+                            color: #333333;
+                        }
+                        p {
+                            font-size: 16px;
+                            color: #666666;
+                        }
+                        ul {
+                            margin-top: 10px;
+                            padding-left: 20px;
+                        }
+                        li {
+                            margin-bottom: 10px;
+                            font-size: 16px;
+                        }
+                        a {
+                            color: #007bff;
+                            text-decoration: none;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h1>Thank You for Reaching Out to Couture by Ikigai!</h1>
+                        <p>We appreciate your interest in working with us. Next steps: </p>
+                        <p><strong>Next Steps:</strong></p>
+                        <ul>
+                            <li>Be on the lookout for a email (couturebyikigai@gmail.com) or text from Aniket (732-997-8157) or Anshul (908-798-1235).</li>
+                            <li>Send any logos or designs to <a href="mailto:couturebyikigai@gmail.com">couturebyikigai@gmail.com</a>.</li>
+                            <li>If you have any questions, don't hesitate to <a href="mailto:couturebyikigai@gmail.com">reach out to us</a>.</li>
+                        </ul>
+                        <p>Best regards,<br/>The Couture by Ikigai Team</p>
+                    </div>
+                </body>
+                </html>
+              `,
             },
           ]);
-        
 
         console.log("[Form Actions] Saved Form Data", response)
       return {
