@@ -139,10 +139,10 @@ export async function submitForm(data: FormData) {
                 <body>
                     <div class="container">
                         <h1>Thank You for Reaching Out to Couture by Ikigai!</h1>
-                        <p>We appreciate your interest in working with us. Next steps: </p>
+                        <p>We appreciate your interest in working with us. </p>
                         <p><strong>Next Steps:</strong></p>
                         <ul>
-                            <li>Be on the lookout for a email (couturebyikigai@gmail.com) or text from Aniket (732-997-8157) or Anshul (908-798-1235).</li>
+                            <li>Be on the lookout for an email (couturebyikigai@gmail.com) or text from Aniket (732-997-8157) or Anshul (908-798-1235).</li>
                             <li>Send any logos or designs to <a href="mailto:couturebyikigai@gmail.com">couturebyikigai@gmail.com</a>.</li>
                             <li>If you have any questions, don't hesitate to <a href="mailto:couturebyikigai@gmail.com">reach out to us</a>.</li>
                         </ul>
