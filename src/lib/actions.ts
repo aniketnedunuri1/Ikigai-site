@@ -86,7 +86,7 @@ export async function submitForm(data: FormData) {
               to: ['couturebyikigai@gmail.com'],
               subject: `${response.name} just signed up. Their email is: ${response.email}, and phone is ${response.phone}`,
               replyTo: 'couturebyikigai@gmail.com',
-              html: '<h1>Anotha one</h1>',
+              html: `<p> ${response.details} </p>`,
             },
             {
               from: 'Couture by Ikigai <noreply@couturebyikigai.com>',
