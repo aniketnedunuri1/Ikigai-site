@@ -37,7 +37,7 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const isCatalogOrFAQPage = (pathname === '/catalog' || pathname === '/faq' || pathname === '/catalog/hoodie' || pathname === '/catalog/crew'
-    || pathname === '/catalog/sweats' || pathname === '/catalog/tee' || pathname === '/reviews');
+    || pathname === '/catalog/sweats' || pathname === '/catalog/tee' || pathname === '/reviews' || pathname === '/gallery');
 
   return (
     <div className="lg:sticky">
