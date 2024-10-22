@@ -138,9 +138,9 @@ const config = {
     },
     extend: {
       screens: {
-        'md-review': '1000px',  // 1x1 at 1000px
+        'md-review': '1300px',  // Switch to 1x1 layout at 768px
         'lg-review': '1559px',  // 2x2 at 1559px
-		 'xl-review': '1800px',
+        'xl-review': '1800px',  // 3x3 at 1800px
       },
       utilities: {
         '.drawer-height-fix': {

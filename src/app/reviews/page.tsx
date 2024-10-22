@@ -8,8 +8,8 @@ export default function Page() {
             {/* Italic text at the top center */}
             <h1 className="text-center mb-8 text-2xl sm:text-3xl lg:text-4xl">Reviews</h1>
 
-            {/* Grid layout for reviews: 1x1 at 1000px, 2x2 at 1559px, 3x3 on larger screens */}
-            <div className="grid grid-cols-1 md-review:grid-cols-1 lg-review:grid-cols-2 xl-review:grid-cols-3 gap-x-2 gap-y-6 w-full max-w-7xl justify-items-center">
+            {/* Grid layout for reviews: 1x1 at 768px, 2x2 at 1559px, 3x3 on larger screens */}
+            <div className="grid grid-cols-1 md-review:grid-cols-2 lg-review:grid-cols-2 xl-review:grid-cols-3 gap-x-2 gap-y-6 w-full max-w-7xl justify-items-center">
                 <ReviewCard
                     description="You both rock thanks again for the hard work. We really enjoy working with you guys and cannot wait to see the product."
                     name="Andrew"
