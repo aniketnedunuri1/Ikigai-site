@@ -68,7 +68,7 @@ import Image from 'next/image';
 
 export default function Page() {
     return (
-        <div className="relative overflow-hidden min-h-screen flex flex-col">
+        <div className=" overflow-hidden min-h-screen flex flex-col">
             {/* Large title in the background */}
             <div className="mt-4 ml-2">
                 {/* Responsive Couture SVG */}
