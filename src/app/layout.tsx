@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@your_twitter_handle", 
+    site: "@your_twitter_handle",
     creator: "@your_twitter_handle",
     title: "Couture | Premium Custom Company & Club Merch",
     description:
@@ -64,17 +64,16 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* Google Analytics */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-PF15DYQ4G5"
-        ></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9WVFLS4CL0"></script>
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-PF15DYQ4G5');
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9WVFLS4CL0');
             `,
           }}
         />
