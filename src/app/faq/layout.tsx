@@ -34,7 +34,7 @@ export default function FAQLayout({
       
       {/* Strip of background with RequestOrder button at the bottom */}
       <div className="h-48 bg-cover bg-center bg-[url('/inverted-background.png')] sm:hidden flex items-end justify-center pb-4">
-        <RequestOrder />
+        <RequestOrder variant="secondary" />
       </div>
       
       {/* RequestOrder button visible on mobile, HeroTile on larger screens */}

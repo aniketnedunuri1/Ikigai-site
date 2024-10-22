@@ -125,7 +125,7 @@ type ButtonVariant = "link" | "default" | "destructive" | "outline" | "secondary
 interface RequestOrderProps {
   variant: ButtonVariant;
 }
-export function RequestOrder({variant}: RequestOrderProps) {
+export function RequestOrder({variant="secondary"}: RequestOrderProps) {
   const [open, setOpen] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(false);
   const [thankYouDialogOpen, setThankYouDialogOpen] = React.useState<boolean>(false);

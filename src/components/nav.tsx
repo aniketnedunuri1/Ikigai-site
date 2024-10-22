@@ -19,12 +19,17 @@ const navItems = {
   '/faq': {
     name: 'FAQ',
   },
+  '/gallery': {
+    name: 'GALLERY',
+  }, 
+  '/reviews': {
+    name: 'REVIEWS',
+  }, 
   'https://calendly.com/aniketnedunuri/30min': {
     name: 'BOOK A CALL',
   },
-  '/gallery': {
-    name: 'GALLERY',
-  }
+  
+
 }
 
 export function Navbar() {
@@ -32,7 +37,7 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const isCatalogOrFAQPage = (pathname === '/catalog' || pathname === '/faq' || pathname === '/catalog/hoodie' || pathname === '/catalog/crew'
-    || pathname === '/catalog/sweats' || pathname === '/catalog/tee');
+    || pathname === '/catalog/sweats' || pathname === '/catalog/tee' || pathname === '/reviews');
 
   return (
     <div className="lg:sticky">
